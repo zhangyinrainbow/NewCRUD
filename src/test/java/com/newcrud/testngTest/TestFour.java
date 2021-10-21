@@ -6,7 +6,7 @@ public class TestFour  {
     @Test
     public void testA()  {
         System.out.println("testA");
-        Assert.assertEquals(1,2);
+        Assert.assertEquals(1,1);
     }
 
     @Test
