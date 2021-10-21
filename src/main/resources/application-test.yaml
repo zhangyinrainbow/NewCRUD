@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-2zel644fmm9p456vd.mysql.rds.aliyuncs.com:3306/testgroup?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: youfenqihuiyuan
+    password: Youfenqi_123456
+server:
+  port: 8084
+
+mybatis:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  type-aliases-package: com.newcrud.entity

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--这里一定要把namespace写全了，要不然会找不到对应的UserMapper里的每一个方法-->
+<mapper namespace="com.newcrud.mapper.UserMapper">
+    <!--我们一般将这个xml对应的实体类的所有字段抽出来放在这里，将它做为一个模板，称之为resultMap，比如我们select  * 那查出来的都是这个对应的实体类对不对
+            type="User"，代表使用哪种类作为其映射的类，可以是别名或者全限定名-->
+    <resultMap id="user" type="User">
+        <!--在自定义的resultMap中第一列通常是主键id,id是作为唯一标识的，当和其他对象实例对比的时候，这个id很有用，尤其是应用到缓存和内嵌的结果映射;
+        property:映射数据库列的字段或属性，如果JavaBean的属性与给定的名称匹配，就会使用匹配的名字;
+        column:数据库的列名或者列标签别名-->
+        <id column="id" property="id" javaType="Integer"></id>
+        <result column="username" property="username" javaType="String"></result>
+        <result column="avatar" property="avatar" javaType="String"></result>
+        <result column="email" property="email" javaType="String"></result>
+        <result column="password" property="password" javaType="String"></result>
+        <result column="status" property="status" javaType="Integer"></result>
+        <result column="created" property="created" javaType="String"></result>
+        <result column="last_login" property="last_login" javaType="String"></result>
+    </resultMap>
+    <!--查询所有用户-->
+    <!--select 对应的是数据库的方法（增删改查）,id="getUsers"对应的mapper层对应接口的定义的方法，resultType="User" 对应的是entity层的实体类-->
+    <select id="getUsers" resultType="User">
+    <!--这里放的就是查询语句-->
+        select * from m_user
+    </select>
+    <!--根据ID查询用户-->
+    <!--这里的resultMap就是上面定义的那个resultMap，resultType="User"，代表使用哪种类作为其映射的类，parameterType="Integer"，参数的类型-->
+    <select id="getUserById" resultMap="user" resultType="User" parameterType="Integer">
+        select * from m_user
+        <trim prefixOverrides="and" suffixOverrides="and">
+            <where>
+                and id = #{id}
+            </where>
+        </trim>
+    </select>
+    <select id="getUSerJmeter" resultType="User" resultMap="user">
+        select * from m_user
+        <trim suffixOverrides="and" prefixOverrides="and">
+            <where>
+                and id=#{id} and
+                username=#{username}
+            </where>
+        </trim>
+    </select>
+    <select id="getUserByUserName" parameterType="String" resultMap="user"  resultType="User">
+        select * from m_user
+        <trim prefixOverrides="and" suffixOverrides="and">
+            <where>
+                and username=#{username}
+            </where>
+        </trim>
+    </select>
+    <!--更新用户-->
+    <update id="updateUser" parameterType="User">
+        update m_user set username=#{username},
+                          avatar=#{avatar},
+                          email=#{email},
+                          password=#{password},
+                          status=#{status},
+                          created=#{created},
+                          last_login=#{last_login}
+        where id=#{id}a
+    </update>
+    <!--新增用户-->
+    <insert id="insertUser" parameterType="User">
+        insert into m_user
+        values (${id},#{username},#{avatar},#{email},#{password},#{status},#{created},#{last_login});
+    </insert>
+    <!--分页查询-->
+    <select id="getUsersPage" resultType="User" resultMap="user">
+        select * from m_user
+    </select>
+    <!--删除用户-->
+    <delete id="deleteUserById" parameterType="Integer">
+        delete from m_user where id=#{id}
+    </delete>
+    <select id="getUSerIdByUserName" parameterType="String" resultType="Integer">
+        select id from m_user where username=#{username}
+    </select>
+</mapper>
