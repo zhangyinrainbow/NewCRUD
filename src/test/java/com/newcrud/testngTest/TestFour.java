@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class TestFour  {
     @Test
     public void testA()  {
-        System.out.println("testA11");
+        System.out.println("testAmaster");
         Assert.assertEquals(1,1);
     }
 
