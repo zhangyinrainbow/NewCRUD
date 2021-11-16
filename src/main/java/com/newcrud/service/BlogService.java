@@ -10,4 +10,5 @@ public interface BlogService {
     boolean insertBlog(Blog blog);
     boolean updateBlog(Blog blog);
     boolean deleteBlogById(Integer id);
+    Blog getBlogById(Integer id);
 }

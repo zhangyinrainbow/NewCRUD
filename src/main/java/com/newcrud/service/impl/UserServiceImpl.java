@@ -21,7 +21,20 @@ public class UserServiceImpl  implements UserService {
     public User getUserById(Integer id) {
         return userMapper.getUserById(id);
     }
-
+    /**
+     * 一对多联合查询
+     * */
+    @Override
+    public User getUserAndBlog(Integer id){
+        return userMapper.getUserAndBlog(id);
+    }
+    /**
+     * 一对多联合查询-union方式
+     * */
+    @Override
+    public User getAllUserAndBlog(Integer id){
+        return userMapper.getAllUserAndBlog(id);
+    }
     @Override
     public List<User> getAllUser() {
         return userMapper.getUsers();

@@ -14,8 +14,6 @@ public class BlogServiceImpl implements BlogService {
     //引入对应的mapper层，因为其实在mapper层完成了xml文件的编写的时候，对应的接口已经实现了其增删改查的功能。
     @Autowired
     BlogMapper blogMapper;
-    @Autowired
-
     @Override
     public List<Blog> getBlogs() {
         return blogMapper.getBlogs();
@@ -39,5 +37,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public boolean deleteBlogById(Integer id) {
         return blogMapper.deleteBlogById(id);
+    }
+
+    @Override
+    public Blog getBlogById (Integer id){
+        return blogMapper.getBlogById(id);
     }
 }

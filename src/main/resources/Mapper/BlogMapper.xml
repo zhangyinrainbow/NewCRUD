@@ -12,7 +12,26 @@
         <result column="content" property="content" javaType="String"></result>
         <result column="created" property="created" javaType="String"></result>
         <result column="status" property="status" javaType="Integer"></result>
+        <!--通过association关键字将User的属性引入进来，几乎每一个表对应的xml都有一个关于本表所有字段的resultMap，其实直接把User的全表resultMap内容复制过来即可-->
+        <association property="user" javaType="User">
+            <id column="id" property="id" javaType="Integer"></id>
+            <result column="username" property="username" javaType="String"></result>
+            <result column="avatar" property="avatar" javaType="String"></result>
+            <result column="email" property="email" javaType="String"></result>
+            <result column="password" property="password" javaType="String"></result>
+            <result column="status" property="status" javaType="Integer"></result>
+            <result column="created" property="created" javaType="String"></result>
+            <result column="last_login" property="last_login" javaType="String"></result>
+        </association>
     </resultMap>
+    <select id="getBlogById" resultType="Blog" resultMap="blog" parameterType="Integer">
+        select a.* from m_user a,m_blog b
+            <where>
+                <trim suffixOverrides="and" prefixOverrides="and">
+                     b.user_id=a.id and b.id= #{id}
+                </trim>
+            </where>
+    </select>
     <select id="getBlogs" resultMap="blog" resultType="Blog">
         select * from m_blog
     </select>

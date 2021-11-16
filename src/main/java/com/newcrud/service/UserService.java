@@ -7,6 +7,14 @@ import com.newcrud.outInParam.PageResult;
 import java.util.List;
 
 public interface UserService {
+    /**
+     * 一对多联合查询
+     * */
+    User getUserAndBlog(Integer id);
+    /**
+     * 一对多联合查询-union方式
+     * */
+    User getAllUserAndBlog(Integer id);
     User getUserById(Integer id);
     List<User> getAllUser();
     boolean insertUser(User user);

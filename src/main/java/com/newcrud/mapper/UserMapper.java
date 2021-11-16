@@ -2,6 +2,7 @@ package com.newcrud.mapper;
 
 import com.newcrud.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,10 +17,19 @@ public interface UserMapper {
     //新增getUsersPage，获取所有用户信息
     List<User> getUsersPage();
     User getUserById(Integer id);
+    /**
+     * 一对多联合查询
+     * */
+    User getUserAndBlog(Integer id);
+    /**
+     * 一对多联合查询-union方式
+     * */
+    User getAllUserAndBlog(Integer id);
     boolean insertUser(User user);
     boolean deleteUserById(Integer id);
     boolean updateUser(User user);
     User getUSerJmeter(Integer id,String username);
     User getUserByUserName(String username);
     Integer getUSerIdByUserName(String username);
+
 }

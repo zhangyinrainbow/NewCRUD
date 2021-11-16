@@ -11,4 +11,5 @@ public interface BlogMapper {
     boolean updateBlog(Blog blog);
     boolean deleteBlogById(Integer id);
     boolean insertBlog(Blog blog);
+    Blog getBlogById(Integer id);
 }
